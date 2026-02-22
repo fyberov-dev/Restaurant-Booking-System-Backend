@@ -41,6 +41,9 @@ public class TableEntity {
     @Column(name = "y", nullable = false)
     private double posY;
 
+    @Column(nullable = false)
+    private boolean isVertical;
+
     @ManyToMany
     @JoinTable(
         name = "tables_table_types",

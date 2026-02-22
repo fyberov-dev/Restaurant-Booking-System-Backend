@@ -1,5 +1,6 @@
 package ee.nimens.restaurant.booking.system.backend.dto.request.table;
 
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.NOT_REQUIRED;
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -17,6 +18,9 @@ public record CreateTableRequestDto(
 
     @Schema(requiredMode = REQUIRED)
     @Min(value = 0, message = "Y value should be atleast 0")
-    double y
+    double y,
+
+    @Schema(requiredMode = NOT_REQUIRED, defaultValue = "false")
+    Boolean isVertical
 ) {
 }

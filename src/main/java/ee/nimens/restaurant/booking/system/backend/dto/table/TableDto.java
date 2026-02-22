@@ -9,6 +9,7 @@ public record TableDto(
     int guests,
     double x,
     double y,
+    boolean isVertical,
     Instant createdAt,
     Instant updatedAt
 ) {

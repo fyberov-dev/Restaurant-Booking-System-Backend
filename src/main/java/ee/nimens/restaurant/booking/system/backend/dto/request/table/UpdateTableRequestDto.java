@@ -17,6 +17,9 @@ public record UpdateTableRequestDto(
 
     @Schema(requiredMode = NOT_REQUIRED)
     @Min(value = 0, message = "Y value should be atleast 0")
-    Double y
+    Double y,
+
+    @Schema(requiredMode = NOT_REQUIRED)
+    Boolean isVertical
 ) {
 }

@@ -53,15 +53,17 @@ public class TableService {
             .guests(dto.guests())
             .posX(dto.x())
             .posY(dto.y())
+            .isVertical(dto.isVertical())
             .build();
 
         TableEntity createdTable = tableRepository.save(table);
 
-        log.debug("New table created. id={}, guests={}, x={}, y={}",
+        log.debug("New table created. id={}, guests={}, x={}, y={}, isVertical={}",
             createdTable.getId(),
             createdTable.getGuests(),
             createdTable.getPosX(),
-            createdTable.getPosY()
+            createdTable.getPosY(),
+            createdTable.isVertical()
         );
 
         return tableMapper.toDto(createdTable);
@@ -94,14 +96,20 @@ public class TableService {
             isUpdated = true;
         }
 
+        if (isUpdated(table.isVertical(), dto.isVertical())) {
+            table.setVertical(dto.isVertical());
+            isUpdated = true;
+        }
+
         if (isUpdated) {
             TableEntity updatedTable = tableRepository.save(table);
 
-            log.debug("Table updated. id={}, guests={}, x={}, y={}",
+            log.debug("Table updated. id={}, guests={}, x={}, y={}, isVertical={}",
                 updatedTable.getId(),
                 dto.guests() != null ? dto.guests() : "",
                 dto.x(),
-                dto.y()
+                dto.y(),
+                dto.isVertical()
             );
 
             return Optional.of(tableMapper.toDto(updatedTable));

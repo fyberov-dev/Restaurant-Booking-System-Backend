@@ -18,6 +18,7 @@ public class TableMapper {
             .guests(entity.getGuests())
             .x(entity.getPosX())
             .y(entity.getPosY())
+            .isVertical(entity.isVertical())
             .createdAt(entity.getCreatedAt())
             .updatedAt(entity.getUpdatedAt())
             .build();
