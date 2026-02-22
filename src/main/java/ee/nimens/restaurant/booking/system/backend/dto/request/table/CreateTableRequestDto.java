@@ -13,10 +13,10 @@ public record CreateTableRequestDto(
 
     @Schema(requiredMode = REQUIRED)
     @Min(value = 0, message = "X value should be atleast 0")
-    float x,
+    double x,
 
     @Schema(requiredMode = REQUIRED)
     @Min(value = 0, message = "Y value should be atleast 0")
-    float y
+    double y
 ) {
 }

@@ -13,10 +13,10 @@ public record UpdateTableRequestDto(
 
     @Schema(requiredMode = NOT_REQUIRED)
     @Min(value = 0, message = "X value should be atleast 0")
-    Float x,
+    Double x,
 
     @Schema(requiredMode = NOT_REQUIRED)
     @Min(value = 0, message = "Y value should be atleast 0")
-    Float y
+    Double y
 ) {
 }

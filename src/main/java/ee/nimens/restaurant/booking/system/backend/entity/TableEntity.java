@@ -36,10 +36,10 @@ public class TableEntity {
     private int guests;
 
     @Column(name = "x", nullable = false)
-    private float posX;
+    private double posX;
 
     @Column(name = "y", nullable = false)
-    private float posY;
+    private double posY;
 
     @ManyToMany
     @JoinTable(

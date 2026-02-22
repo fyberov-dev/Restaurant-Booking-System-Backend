@@ -7,8 +7,8 @@ import lombok.Builder;
 public record TableDto(
     Long id,
     int guests,
-    float x,
-    float y,
+    double x,
+    double y,
     Instant createdAt,
     Instant updatedAt
 ) {
