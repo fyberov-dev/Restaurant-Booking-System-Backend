@@ -53,7 +53,7 @@ public class TableService {
             .guests(dto.guests())
             .posX(dto.x())
             .posY(dto.y())
-            .isVertical(dto.isVertical())
+            .isVertical(dto.isVertical() == null ? false : dto.isVertical())
             .build();
 
         TableEntity createdTable = tableRepository.save(table);
@@ -152,7 +152,7 @@ public class TableService {
      * @return found table entity
      * @throws TableNotFoundException if table doesn't exist
      */
-    private TableEntity getEntityById(long id) {
+    public TableEntity getEntityById(long id) {
         return tableRepository.findById(id)
             .orElseThrow(TableNotFoundException::new);
     }

@@ -4,6 +4,7 @@ import ee.nimens.restaurant.booking.system.backend.dto.request.table.CreateTable
 import ee.nimens.restaurant.booking.system.backend.dto.request.table.UpdateTableRequestDto;
 import ee.nimens.restaurant.booking.system.backend.dto.table.TableDto;
 import ee.nimens.restaurant.booking.system.backend.service.TableService;
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -36,12 +37,12 @@ public class TableController {
     }
 
     @PostMapping
-    public ResponseEntity<TableDto> createTable(@RequestBody CreateTableRequestDto dto) {
+    public ResponseEntity<TableDto> createTable(@RequestBody @Valid CreateTableRequestDto dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(tableService.create(dto));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TableDto> updateTable(@PathVariable long id, @RequestBody UpdateTableRequestDto dto) {
+    public ResponseEntity<TableDto> updateTable(@PathVariable long id, @RequestBody @Valid UpdateTableRequestDto dto) {
         Optional<TableDto> tableOptional = tableService.update(id, dto);
 
         if (tableOptional.isPresent()) {

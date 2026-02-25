@@ -1,5 +1,6 @@
 package ee.nimens.restaurant.booking.system.backend.exception;
 
+import ee.nimens.restaurant.booking.system.backend.exception.booking.InvalidBookingTimeException;
 import ee.nimens.restaurant.booking.system.backend.exception.table.TableNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import java.net.URI;
@@ -34,6 +35,14 @@ public class GlobalExceptionHandler {
         TableNotFoundException ex
     ) {
         return handleNotFoundRequest(req, ex.getMessage());
+    }
+
+    @ExceptionHandler(InvalidBookingTimeException.class)
+    public ResponseEntity<ProblemDetail> handleInvalidBookingTimeException(
+        HttpServletRequest req,
+        InvalidBookingTimeException ex
+    ) {
+        return handleBadRequest(req, ex.getMessage());
     }
 
     public ResponseEntity<ProblemDetail> handleNotFoundRequest(HttpServletRequest req, String message) {
