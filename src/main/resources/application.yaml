@@ -6,6 +6,7 @@ server:
 spring:
   application:
     name: backend
+    timezone: "Europe/Tallinn"
   datasource:
     username: postgres
     password: postgres

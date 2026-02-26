@@ -1,0 +1,15 @@
+INSERT INTO tables (guests, x, y, is_vertical) VALUES
+    (2, 76, 174, FALSE),
+    (2, 215, 174, FALSE),
+    (2, 17, 211, TRUE),
+    (2, 17, 308, TRUE),
+    (2, 105, 350, FALSE),
+    (2, 205, 350, FALSE),
+    (4, 105, 250, FALSE),
+    (4, 205, 250, FALSE),
+    (4, 315, 250, FALSE),
+    (4, 425, 250, FALSE),
+    (6, 370, 360, FALSE),
+    (6, 370, 500, FALSE),
+    (2, 285, 425, TRUE),
+    (2, 285, 525, TRUE);

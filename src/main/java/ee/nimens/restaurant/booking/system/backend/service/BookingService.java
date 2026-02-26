@@ -7,7 +7,7 @@ import ee.nimens.restaurant.booking.system.backend.entity.TableEntity;
 import ee.nimens.restaurant.booking.system.backend.exception.booking.InvalidBookingTimeException;
 import ee.nimens.restaurant.booking.system.backend.repository.BookingRepository;
 import ee.nimens.restaurant.booking.system.backend.util.mapper.BookingMapper;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -27,11 +27,11 @@ public class BookingService {
     /**
      * Get all bookings between two timestamps.
      *
-     * @param startTime booking should be after this LocalDateTime
-     * @param endTime booking should be before this LocalDateTime
+     * @param startTime booking should be after this ZonedDateTime
+     * @param endTime booking should be before this ZonedDateTime
      * @return all found bookings
      */
-    public List<BookingDto> get(LocalDateTime startTime, LocalDateTime endTime) {
+    public List<BookingDto> get(ZonedDateTime startTime, ZonedDateTime endTime) {
         return bookingMapper.toDtos(findBetween(startTime, endTime));
     }
 
@@ -48,15 +48,14 @@ public class BookingService {
      * @return dto of a created booking
      */
     public BookingDto create(CreateBookingRequestDto dto) {
-        TableEntity table = tableService.getEntityById(dto.tableId());
-
-        LocalDateTime truncatedStartsAt = dto.startsAt().truncatedTo(ChronoUnit.MINUTES);
-        LocalDateTime truncatedEndsAt = dto.endsAt().truncatedTo(ChronoUnit.MINUTES);
+        ZonedDateTime truncatedStartsAt = dto.startsAt().truncatedTo(ChronoUnit.MINUTES);
+        ZonedDateTime truncatedEndsAt = dto.endsAt().truncatedTo(ChronoUnit.MINUTES);
 
         if (truncatedStartsAt.isAfter(truncatedEndsAt)) {
             throw new InvalidBookingTimeException("Start timing should be before end timing");
         }
 
+        TableEntity table = tableService.getEntityById(dto.tableId());
         BookingEntity createdEntity = bookingRepository.save(BookingEntity.builder()
             .tableId(table.getId())
             .phone(dto.phone())
@@ -78,11 +77,11 @@ public class BookingService {
     /**
      * Get bookings between two dates (include).
      *
-     * @param start bookings should be after this LocalDateTime
-     * @param end bookings should be before this LocalDateTime
+     * @param start bookings should be after this ZonedDateTime
+     * @param end bookings should be before this ZonedDateTime
      * @return found bookings
      */
-    private List<BookingEntity> findBetween(LocalDateTime start, LocalDateTime end) {
+    private List<BookingEntity> findBetween(ZonedDateTime start, ZonedDateTime end) {
         return bookingRepository.findAllByStartsAtBetween(start, end);
     }
 

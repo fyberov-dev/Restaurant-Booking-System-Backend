@@ -4,7 +4,7 @@ import ee.nimens.restaurant.booking.system.backend.dto.request.booking.BookingDt
 import ee.nimens.restaurant.booking.system.backend.dto.request.booking.CreateBookingRequestDto;
 import ee.nimens.restaurant.booking.system.backend.service.BookingService;
 import jakarta.validation.Valid;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +24,8 @@ public class BookingController {
 
     @GetMapping
     public ResponseEntity<List<BookingDto>> get(
-        @RequestParam LocalDateTime startTime,
-        @RequestParam LocalDateTime endTime
+        @RequestParam ZonedDateTime startTime,
+        @RequestParam ZonedDateTime endTime
     ) {
         return ResponseEntity.ok().body(bookingService.get(startTime, endTime));
     }
