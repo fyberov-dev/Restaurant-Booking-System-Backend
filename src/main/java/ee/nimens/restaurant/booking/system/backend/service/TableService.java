@@ -27,7 +27,7 @@ public class TableService {
      * @return list of tables dtos
      */
     public List<TableDto> getAll() {
-        return tableMapper.toDtos(tableRepository.findAll());
+        return tableMapper.toDtos(findAll());
     }
 
     /**
@@ -37,7 +37,7 @@ public class TableService {
      * @return dto of a found table
      */
     public TableDto getById(long id) {
-        return tableMapper.toDto(getEntityById(id));
+        return tableMapper.toDto(findById(id));
     }
 
     /**
@@ -77,7 +77,7 @@ public class TableService {
      * @return dto of an updated table if it was updated, otherwise Optional.Empty()
      */
     public Optional<TableDto> update(long id, UpdateTableRequestDto dto) {
-        TableEntity table = getEntityById(id);
+        TableEntity table = findById(id);
 
         boolean isUpdated = false;
 
@@ -126,11 +126,32 @@ public class TableService {
      * @param id id of the table to delete
      */
     public void delete(long id) {
-        TableEntity table = getEntityById(id);
+        TableEntity table = findById(id);
 
         log.debug("Table deleted. id={}", id);
 
         tableRepository.delete(table);
+    }
+
+    /**
+     * Get table entity using id.
+     *
+     * @param id id of the table to find
+     * @return found table entity
+     * @throws TableNotFoundException if table doesn't exist
+     */
+    public TableEntity findById(long id) {
+        return tableRepository.findById(id)
+            .orElseThrow(TableNotFoundException::new);
+    }
+
+    /**
+     * Find all the tables in a restaurant.
+     *
+     * @return all the tables at the restaurant
+     */
+    public List<TableEntity> findAll() {
+        return tableRepository.findAll();
     }
 
     /**
@@ -143,18 +164,6 @@ public class TableService {
      */
     private <T> boolean isUpdated(T current, T updated) {
         return updated != null && !updated.equals(current);
-    }
-
-    /**
-     * Get table entity using id.
-     *
-     * @param id id of the table to find
-     * @return found table entity
-     * @throws TableNotFoundException if table doesn't exist
-     */
-    public TableEntity getEntityById(long id) {
-        return tableRepository.findById(id)
-            .orElseThrow(TableNotFoundException::new);
     }
 
 }

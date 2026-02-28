@@ -25,17 +25,6 @@ public class BookingService {
     private final BookingMapper bookingMapper;
 
     /**
-     * Get all bookings between two timestamps.
-     *
-     * @param startTime booking should be after this ZonedDateTime
-     * @param endTime booking should be before this ZonedDateTime
-     * @return all found bookings
-     */
-    public List<BookingDto> get(ZonedDateTime startTime, ZonedDateTime endTime) {
-        return bookingMapper.toDtos(findBetween(startTime, endTime));
-    }
-
-    /**
      * Create new booking.
      * <p></p>
      * Booking should have:
@@ -55,7 +44,7 @@ public class BookingService {
             throw new InvalidBookingTimeException("Start timing should be before end timing");
         }
 
-        TableEntity table = tableService.getEntityById(dto.tableId());
+        TableEntity table = tableService.findById(dto.tableId());
         BookingEntity createdEntity = bookingRepository.save(BookingEntity.builder()
             .tableId(table.getId())
             .phone(dto.phone())
@@ -81,8 +70,8 @@ public class BookingService {
      * @param end bookings should be before this ZonedDateTime
      * @return found bookings
      */
-    private List<BookingEntity> findBetween(ZonedDateTime start, ZonedDateTime end) {
-        return bookingRepository.findAllByStartsAtBetween(start, end);
+    public List<BookingEntity> findBetween(ZonedDateTime start, ZonedDateTime end) {
+        return bookingRepository.findAllBetween(start, end);
     }
 
 }
