@@ -1,4 +1,4 @@
-package ee.nimens.restaurant.booking.system.backend.dto.request.booking;
+package ee.nimens.restaurant.booking.system.backend.dto.booking;
 
 import java.time.ZonedDateTime;
 import lombok.Builder;

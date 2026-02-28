@@ -1,7 +1,7 @@
 package ee.nimens.restaurant.booking.system.backend.service;
 
+import ee.nimens.restaurant.booking.system.backend.dto.booking.TableRating;
 import ee.nimens.restaurant.booking.system.backend.dto.request.booking.FilterBookingDto;
-import ee.nimens.restaurant.booking.system.backend.dto.request.booking.TableRating;
 import ee.nimens.restaurant.booking.system.backend.entity.BookingEntity;
 import ee.nimens.restaurant.booking.system.backend.entity.TableEntity;
 import java.time.ZonedDateTime;

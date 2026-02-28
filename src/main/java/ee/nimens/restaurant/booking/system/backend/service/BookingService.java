@@ -1,6 +1,6 @@
 package ee.nimens.restaurant.booking.system.backend.service;
 
-import ee.nimens.restaurant.booking.system.backend.dto.request.booking.BookingDto;
+import ee.nimens.restaurant.booking.system.backend.dto.booking.BookingDto;
 import ee.nimens.restaurant.booking.system.backend.dto.request.booking.CreateBookingRequestDto;
 import ee.nimens.restaurant.booking.system.backend.entity.BookingEntity;
 import ee.nimens.restaurant.booking.system.backend.entity.TableEntity;

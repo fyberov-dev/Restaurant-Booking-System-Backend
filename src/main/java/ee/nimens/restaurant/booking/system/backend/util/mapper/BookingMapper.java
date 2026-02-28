@@ -1,6 +1,6 @@
 package ee.nimens.restaurant.booking.system.backend.util.mapper;
 
-import ee.nimens.restaurant.booking.system.backend.dto.request.booking.BookingDto;
+import ee.nimens.restaurant.booking.system.backend.dto.booking.BookingDto;
 import ee.nimens.restaurant.booking.system.backend.entity.BookingEntity;
 import java.util.List;
 import org.springframework.stereotype.Component;

@@ -50,7 +50,7 @@ public class TableEntity {
         joinColumns = @JoinColumn(name = "table_id"),
         inverseJoinColumns = @JoinColumn(name = "table_type_id")
     )
-    private Set<TableTypeEntity> type;
+    private Set<TableTypeEntity> types;
 
     @CreationTimestamp
     private Instant createdAt;
