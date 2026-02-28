@@ -1,6 +1,6 @@
 package ee.nimens.restaurant.booking.system.backend.controller;
 
-import ee.nimens.restaurant.booking.system.backend.entity.RestaurantEntity;
+import ee.nimens.restaurant.booking.system.backend.dto.restaurant.RestaurantDto;
 import ee.nimens.restaurant.booking.system.backend.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ public class RestaurantController {
     private final RestaurantService restaurantService;
 
     @GetMapping
-    public ResponseEntity<RestaurantEntity> get() {
+    public ResponseEntity<RestaurantDto> get() {
         return ResponseEntity.status(HttpStatus.OK).body(restaurantService.get());
     }
 
