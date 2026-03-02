@@ -11,6 +11,8 @@ public record FilterBookingDto(
     ZonedDateTime endTime,
 
     @NotNull(message = "guests param should not be null")
-    int guests
+    int guests,
+
+    String type
 ) {
 }

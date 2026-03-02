@@ -16,13 +16,17 @@ VALUES (2, 76, 174, FALSE),
        (2, 40, 436, TRUE),
        (2, 168, 436, TRUE),
        (2, 40, 564, TRUE),
-       (2, 168, 564, TRUE);
+       (2, 168, 564, TRUE),
+       (2, 503, 40, TRUE),
+       (2, 680, 40, TRUE),
+       (12, 534, 200, TRUE),
+       (12, 534, 300, TRUE);
 
 INSERT INTO table_types (type, title)
 VALUES ('NEAR_WINDOW', 'Near the window'),
        ('VIP', 'VIP tables'),
-       ('GROUP', 'Tables for big groups'),
-       ('ON_TERRACE', 'Table on a terrace');
+       ('GROUP', 'For big groups'),
+       ('ON_TERRACE', 'On a terrace');
 
 INSERT INTO tables_table_types (table_id, table_type_id)
 VALUES (1, 1),
@@ -32,4 +36,9 @@ VALUES (1, 1),
        (15, 2),
        (16, 2),
        (17, 2),
-       (18, 2);
+       (18, 2),
+       (19, 4),
+       (20, 4),
+       (21, 3),
+       (21, 1),
+       (22, 3);
