@@ -5,7 +5,7 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
-import java.time.ZonedDateTime;
+import java.time.Instant;
 
 public record CreateBookingRequestDto(
     @Schema(requiredMode = REQUIRED)
@@ -20,9 +20,9 @@ public record CreateBookingRequestDto(
     String email,
 
     @Schema(requiredMode = REQUIRED)
-    ZonedDateTime startsAt,
+    Instant startsAt,
 
     @Schema(requiredMode = REQUIRED)
-    ZonedDateTime endsAt
+    Instant endsAt
 ) {
 }

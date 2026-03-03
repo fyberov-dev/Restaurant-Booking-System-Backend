@@ -7,14 +7,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.Instant;
-import java.time.ZonedDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.TimeZoneColumn;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
@@ -40,11 +38,10 @@ public class BookingEntity {
     private String email;
 
     @Column(nullable = false)
-    @TimeZoneColumn
-    private ZonedDateTime startsAt;
+    private Instant startsAt;
 
     @Column(nullable = false)
-    private ZonedDateTime endsAt;
+    private Instant endsAt;
 
     @CreationTimestamp
     private Instant createdAt;

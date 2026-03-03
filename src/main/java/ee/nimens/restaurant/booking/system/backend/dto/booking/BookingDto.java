@@ -1,13 +1,13 @@
 package ee.nimens.restaurant.booking.system.backend.dto.booking;
 
-import java.time.ZonedDateTime;
+import java.time.Instant;
 import lombok.Builder;
 
 @Builder
 public record BookingDto(
     long id,
     long tableId,
-    ZonedDateTime startsAt,
-    ZonedDateTime endsAt
+    Instant startsAt,
+    Instant endsAt
 ) {
 }

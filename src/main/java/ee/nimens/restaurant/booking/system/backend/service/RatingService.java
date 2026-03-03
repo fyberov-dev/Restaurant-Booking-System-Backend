@@ -5,7 +5,7 @@ import ee.nimens.restaurant.booking.system.backend.dto.request.booking.FilterBoo
 import ee.nimens.restaurant.booking.system.backend.entity.BookingEntity;
 import ee.nimens.restaurant.booking.system.backend.entity.TableEntity;
 import ee.nimens.restaurant.booking.system.backend.entity.TableTypeEntity;
-import java.time.ZonedDateTime;
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -47,9 +47,13 @@ public class RatingService {
         return rating;
     }
 
-    private Map<Long, TableRating> getBookedTablesRating(ZonedDateTime startTime, ZonedDateTime endTime) {
+    private Map<Long, TableRating> getBookedTablesRating(Instant startTime, Instant endTime) {
         return bookingService.findBetween(startTime, endTime).stream()
-            .collect(Collectors.toMap(BookingEntity::getTableId, (ignored) -> TableRating.UNAVAILABLE));
+            .collect(Collectors.toMap(
+                BookingEntity::getTableId,
+                (ignored) -> TableRating.UNAVAILABLE,
+                (current, ignored) -> current
+            ));
     }
 
     private boolean matchesByType(Set<TableTypeEntity> tableTypes, String filterType) {
