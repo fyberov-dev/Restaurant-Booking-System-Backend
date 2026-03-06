@@ -18,6 +18,7 @@ Reservation system for a restaurant with a filtering functionality and customiza
         - [5.2.1. What should be done?](#521-what-should-be-done)
     - [5.3. Session](#53-session)
         - [5.3.1. What should be done?](#531-what-should-be-done)
+    - [5.4. Tests](#54-tests)
   
 
 ## 1. Tech Stack
