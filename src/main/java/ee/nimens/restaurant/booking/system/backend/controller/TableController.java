@@ -4,6 +4,7 @@ import ee.nimens.restaurant.booking.system.backend.dto.request.table.CreateTable
 import ee.nimens.restaurant.booking.system.backend.dto.request.table.UpdateTableRequestDto;
 import ee.nimens.restaurant.booking.system.backend.dto.table.TableDto;
 import ee.nimens.restaurant.booking.system.backend.service.TableService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name = "Table", description = "Control table")
 @RestController
 @RequestMapping("/v1/table")
 @RequiredArgsConstructor

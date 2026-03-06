@@ -3,6 +3,7 @@ package ee.nimens.restaurant.booking.system.backend.controller;
 import ee.nimens.restaurant.booking.system.backend.dto.booking.BookingDto;
 import ee.nimens.restaurant.booking.system.backend.dto.request.booking.CreateBookingRequestDto;
 import ee.nimens.restaurant.booking.system.backend.service.BookingService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name = "Booking", description = "Make reservation of the table")
 @RestController
 @RequestMapping("/v1/book")
 @RequiredArgsConstructor
