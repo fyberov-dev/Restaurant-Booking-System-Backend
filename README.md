@@ -2,7 +2,8 @@
 
 Reservation system for a restaurant with a filtering functionality and customizable floor planning.
 
-Blocks:
+## 0. Content
+
 - [1. Tech Stack](#1-tech-stack)
 - [2. Setup](#2-setup)
   - [2.1. Run locally](#21-run-locally)
@@ -145,3 +146,7 @@ Customer sessions with an overview of a reserved tables
 After table reservation create a JWT token that will be storing reservations of a customer.
 
 So, customer will always have an overview of a reserved tables. Or if customer pre-ordered food he will see a list of pre-ordered food. 
+
+### 5.4. Tests
+
+Test application by writing unit tests
