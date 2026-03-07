@@ -29,6 +29,7 @@ Frontend: https://github.com/fyberov-dev/Restaurant-Booking-System-Frontend
 - Spring Boot 4
 - PostgreSQL
 - Flyway
+- Docker
 
 ## 2. Setup
 
@@ -85,6 +86,12 @@ Build project using gradle
 ./gradlew build -x test
 ```
 *currently without tests
+
+Create external network
+
+```shell
+docker network create reservation_backend
+```
 
 Run docker
 
