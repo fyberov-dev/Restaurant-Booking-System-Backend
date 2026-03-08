@@ -20,6 +20,30 @@ public class RatingService {
     private final BookingService bookingService;
     private final TableService tableService;
 
+    /**
+     * Get rating of the tables by filters.
+     * <p></p>
+     * Available filters:
+     *  - Start time
+     *  - End time
+     *  - Guests number
+     *  - Table type
+     * <p></p>
+     * System works like: less rating -> better match
+     * <p></p>
+     * Rating distribution:
+     *  - 0 -> PERFECT MATCH
+     *  - 1 -> GOOD MATCH
+     *  - >1 -> BAD MATCH
+     *  - Already Booked -> UNAVAILABLE
+     * <p></p>
+     * If table type provided and table's type doesn't equal, then rating will be +1
+     * If table has more than 2 needed sits, then rating will be +2
+     * If table has from 1 to 2 more needed sits, then rating will be +1
+     *
+     * @param dto table filters
+     * @return map where key={id of the table} and value={table rating}
+     */
     public Map<Long, TableRating> getRating(FilterBookingDto dto) {
         Map<Long, TableRating> rating = getBookedTablesRating(dto.startTime(), dto.endTime());
 
@@ -28,18 +52,27 @@ public class RatingService {
         for (TableEntity table : tables) {
             long tableId = table.getId();
 
-            TableRating tableRating;
             if (rating.containsKey(tableId)) {
                 continue;
-            } else if (dto.type() != null && !matchesByType(table.getTypes(), dto.type())) {
-                tableRating = TableRating.BAD;
-            } else if (Math.abs(table.getGuests() - dto.guests()) >= 2) {
-                tableRating = TableRating.BAD;
-            } else if (table.getGuests() - dto.guests() != 0) {
-                tableRating = TableRating.AVAILABLE;
-            } else {
-                tableRating = TableRating.PERFECT;
             }
+            
+            int currentRating = 0;
+            if (dto.type() != null && !matchesByType(table.getTypes(), dto.type())) {
+                currentRating += 1;
+            }
+
+            int guestsDiff = Math.abs(table.getGuests() - dto.guests());
+            if (guestsDiff > 2) {
+                currentRating += 2;
+            } else if (guestsDiff >= 1) {
+                currentRating += 1;
+            }
+            
+            TableRating tableRating = switch (currentRating) {
+                case 0 -> TableRating.PERFECT;
+                case 1 -> TableRating.AVAILABLE;
+                default -> TableRating.BAD;
+            };
 
             rating.put(tableId, tableRating);
         }
@@ -47,8 +80,15 @@ public class RatingService {
         return rating;
     }
 
-    private Map<Long, TableRating> getBookedTablesRating(Instant startTime, Instant endTime) {
-        return bookingService.findBetween(startTime, endTime).stream()
+    /**
+     * Get all bookings between start and end time and make them UNAVAILABLE (Because they are busy).
+     *
+     * @param start bookings should be before this Instant
+     * @param end bookings should be after this Instant
+     * @return map of bookings rated as UNAVAILABLE
+     */
+    private Map<Long, TableRating> getBookedTablesRating(Instant start, Instant end) {
+        return bookingService.findBetween(start, end).stream()
             .collect(Collectors.toMap(
                 BookingEntity::getTableId,
                 (ignored) -> TableRating.UNAVAILABLE,
@@ -56,6 +96,15 @@ public class RatingService {
             ));
     }
 
+    /**
+     * Check if table matches by type.
+     * <p></p>
+     * Table can have many types, so it's types should be iterated and checked if any of them matches needed type.
+     *
+     * @param tableTypes types of the table
+     * @param filterType type to match
+     * @return true if table has needed type, otherwise return false
+     */
     private boolean matchesByType(Set<TableTypeEntity> tableTypes, String filterType) {
         for (TableTypeEntity entity : tableTypes) {
             if (entity.getType().equals(filterType)) {
