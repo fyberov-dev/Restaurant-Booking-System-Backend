@@ -1,4 +1,4 @@
-package ee.nimens.restaurant.booking.system.backend.docs;
+package ee.nimens.restaurant.booking.system.backend.config.docs;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
